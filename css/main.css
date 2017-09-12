@@ -1,3 +1,5 @@
 h1 {
-  border: 1px solid blue;
-  color: blue; }
+  height: 200px;
+  border: 20px solid blue;
+  color: red;
+  width: 400px; }

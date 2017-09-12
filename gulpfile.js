@@ -1,5 +1,6 @@
 var gulp = require('gulp');
 var sass = require('gulp-sass');
+var deploy = require('gulp-gh-pages');
 var browserSync = require('browser-sync').create();
 
 gulp.task('styles', function() {
@@ -9,16 +10,22 @@ gulp.task('styles', function() {
     .pipe(browserSync.reload({stream: true}));
 });
 
+gulp.task('deploy', function (){
+  return gulp.src("./dist/**/*")
+    .pipe(deploy())
+});
+
 gulp.task('serve', function () {
 
-  browserSync.init({
-    server: {
-      baseDir: './'
-    }
-  });
+    browserSync.init({
+      server: {
+        baseDir: './'
+      },
+    });
 
-  gulp.watch('./scss/*.scss', ['styles']);
-  gulp.watch('./**/*.html').on('change', browserSync.reload);
+    gulp.watch('./scss/*.scss', ['styles']);
+    gulp.watch('./**/*.html').on('change', browserSync.reload);
+
 });
 
 gulp.task('default', ['styles','serve']);
